@@ -7,6 +7,8 @@ $(function ()
     if(hash[0] == '#') {
         var tweets = $('#tweets');
 
+        $('#battle').find('.head .sub').html(hash.toUpperCase());
+
         socket.emit('register', hash);
 
         socket.on('tweet', function (data)
