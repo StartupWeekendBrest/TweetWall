@@ -1,0 +1,271 @@
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Roboto Light'), local('Roboto-Light'), url(/fonts/roboto300.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    src: local('Roboto Medium'), local('Roboto-Medium'), url(/fonts/roboto500.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Love Ya Like A Sister';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Love Ya Like A Sister Regular'), local('LoveYaLikeASister-Regular'), url(/fonts/LoveYaLikeASister.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Arvo';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Arvo Bold'), local('Arvo-Bold'), url(/fonts/arvo.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+html, body, .container {
+    height: 100%;
+    overflow: hidden;
+    background: #FFF;
+    margin: 0;
+    padding: 0;
+
+    font-weight: 300;
+    font-family: "Roboto", Arial, sans-serif;
+    /*color: @fontgrey;*/
+}
+
+/***************************************************************************
+ * Battle
+ **************************************************************************/
+#battle {
+    position: relative;
+    height: 100%;
+    margin-right: 360px;
+
+    background: #EBEBEB url(/img/paper.png) repeat 0 0;
+}
+
+#battle .head {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: brown;
+    height: 120px;
+
+    z-index: 2;
+
+    font-family: 'Arvo', sans-serif;
+}
+
+#battle .head h1 {
+    color: #ffffff;
+    font-weight: 500;
+    text-align: center;
+    font-size: 3em;
+    margin: 12px 0;
+}
+
+#battle .head .sw {
+    position: absolute;
+    top: 25px;
+    right: 0;
+    bottom: 0;
+}
+
+#battle .head .sw span {
+    font-weight: 500;
+    position: absolute;
+    top: 55px;
+    font-size: 6px;
+    display: block;
+    font-family: "Roboto", Arial, sans-serif;
+}
+
+#battle .head .sw.left span {
+    left: 48px;
+    transform: rotate(44deg);
+}
+
+#battle .head .sw.right span {
+    left: 105px;
+    transform: rotate(-44deg);
+}
+
+#battle .head .sw.left {
+    left: -80%;
+}
+
+#battle .head .sw.right {
+    left: 150%;
+}
+
+#battle .head .sw object {
+    height: 85px;
+}
+
+#battle .inner {
+    box-sizing: border-box;
+    padding-top: 120px;
+    height: 100%;
+}
+
+#ranking {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+
+    min-height: 100%;
+
+    margin-right: 40px;
+    padding: 32px;
+    box-sizing: border-box;
+}
+
+.rank {
+    text-align: center;
+}
+
+.rank-inner {
+    position: relative;
+    padding: 16px;
+    display: inline-block;
+    border-radius: 10px;
+    border-bottom: 5px solid;
+    background: #ffffff;
+
+    font-family: 'Love Ya Like A Sister', cursive;
+}
+
+.rank .hash {
+    font-size: 3em;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+}
+
+.rank .score {
+    position: relative;
+    font-size: 2em;
+    z-index: 1;
+}
+
+.rank .index {
+    position: absolute;
+    top: 50%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 12px;
+    font-size: 7em;
+    font-family: "Arvo", sans-serif;
+    margin-top: -0.6em;
+    color: rgb(225, 225, 225);
+}
+
+#chart {
+    position: absolute;
+    top: 114px;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+
+/***************************************************************************
+ * Tweets
+ **************************************************************************/
+#tweets-container {
+    position: absolute;
+    background: #ffffff;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 360px;
+    z-index: 3;
+}
+
+#tweets {
+    margin: 0;
+    padding: 0;
+}
+
+.tweet {
+    position: relative;
+    overflow: auto;
+    padding: 16px 16px 20px 0;
+}
+
+.tweet .pic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 72px;
+    bottom: 0;
+}
+
+.tweet img {
+    /*position: absolute;
+    top: 50%;*/
+    margin-top: 16px;
+    margin-left: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.tweet .content {
+    margin-left: 72px;
+}
+
+.tweet .content .underline {
+    position: absolute;
+    bottom: 0;
+    left: 72px;
+    right: 0;
+    height: 1px;
+    background: lightgrey;
+}
+
+.tweet h1 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.tweet p {
+    margin: 8px 0 0 0;
+}
+
+.tweet p span {
+    color: gray;
+}
+
+/***************************************************************************
+ * Shadow
+ **************************************************************************/
+.shadow-bottom-2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2);
+}
+
+.shadow-bottom-2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, .19);
+}

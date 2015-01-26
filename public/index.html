@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TweetWall</title>
+
+    <link href="index.css" rel="stylesheet">
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+
+    <script src="js/d3.min.js"></script>
+    <script src="js/d3.layout.min.js"></script>
+    <script src="js/rickshaw.min.js"></script>
+    <script src="js/rickshaw.graph.axis.time.min.js"></script>
+    <link href="css/rickshaw.min.css" rel="stylesheet">
+
+    <script src="index.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <div id="battle">
+        <div class="head">
+            <h1>SW BATTLE</h1>
+            <div class="sw left">
+                <object data="img/tweetBattle.svg" type="image/svg+xml"></object>
+                <!--<span>#SW_BREST</span>-->
+            </div>
+            <div class="sw right">
+                <object data="img/tweetBattleR.svg" type="image/svg+xml"></object>
+                <!--<span>#SW_BREST</span>-->
+            </div>
+        </div>
+        <div class="inner">
+            <div id="chart"></div>
+
+            <div id="ranking">
+                <div style="order: 0"><!-- SPACER --></div>
+                <div style="order: 1000"><!-- SPACER --></div>
+            </div>
+        </div>
+    </div>
+    <div id="tweets-container">
+        <div class="shadow-top-2"></div>
+        <div class="shadow-bottom-2"></div>
+
+        <ul id="tweets"></ul>
+    </div>
+</div>
+
+<!--script src="js/bootstrap.min.js"></script-->
+</body>
+</html>
