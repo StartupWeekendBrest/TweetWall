@@ -170,13 +170,19 @@ $(function ()
 
             elem.css('order', i + 1);
             if(i === 0) {
-                elem.css('width', '100%');
+                elem.css('min-width', '100%');
+                elem.find('.hash').css('font-size', '3em');
+                elem.find('.score').css('font-size', '2em');
             }
             else if(i === 1 || i === 2) {
-                elem.css('width', '50%');
+                elem.css('min-width', '50%');
+                elem.find('.hash').css('font-size', '2em');
+                elem.find('.score').css('font-size', '1.5em');
             }
             else {
-                elem.css('width', 'inherit');
+                elem.css('min-width', 'inherit');
+                elem.find('.hash').css('font-size', '2em');
+                elem.find('.score').css('font-size', '1.5em');
             }
 
             elem.find('.index').html(i + 1);
@@ -286,16 +292,23 @@ $(function ()
     {
         var lastShowed = 0;
         function setSvgColor(svg, main, back) {
+            var svgDom = svg.contentDocument || svg.getSVGDocument();
+            if(!svgDom)
+            {
+                console.error('svg not available');
+                return;
+            }
+
             for( var i = 1; i < 10; i++)
             {
-                var svgItem = svg.getElementById("deco-" + i);
+                var svgItem = svgDom.getElementById("deco-" + i);
                 if (svgItem)
                     svgItem.setAttribute("fill", main);
             }
-            var bouclier = svg.getElementById("Bouclier");
+            var bouclier = svgDom.getElementById("Bouclier");
             if (bouclier)
                 bouclier.setAttribute("fill", back);
-            var bouclierExt = svg.getElementById("BouclierExt");
+            var bouclierExt = svgDom.getElementById("BouclierExt");
             if (bouclierExt)
                 bouclierExt.setAttribute("stroke", main);
         }
@@ -312,7 +325,7 @@ $(function ()
 
             if (Math.random() > 0.5)
             {
-                setSvgColor($('.sw.left object')[0].contentDocument, '#' + color.main, '#' + color.back);
+                setSvgColor($('.sw.left object')[0], '#' + color.main, '#' + color.back);
 
                 $('.sw.left').animate({left: '150%'}, 10000, 'linear', function ()
                 {
@@ -322,7 +335,7 @@ $(function ()
             }
             else
             {
-                setSvgColor($('.sw.right object')[0].contentDocument, '#' + color.main, '#' + color.back);
+                setSvgColor($('.sw.right object')[0], '#' + color.main, '#' + color.back);
                 $('.sw.right').animate({left: '-80%'}, 10000, 'linear', function ()
                 {
                     $('.sw.right').css('left', '150%');
