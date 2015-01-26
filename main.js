@@ -62,23 +62,14 @@ app.use(function errorHandler (err, req, res, next)
 /************************************************************************************************************************
  * Loading config
  ************************************************************************************************************************/
-config.wall = _.map(config.wall, function (hash)
-{
-    return hash.toLowerCase();
-});
 config.battle = _.map(config.battle, function (hash)
 {
-    /*if( hash[0] !== '#')
-     hash = '#' + hash;*/
-
     return hash.toLowerCase();
 });
 
-var tracking    = _.union(config.wall, config.battle),
-    battleCount = _.zipObject(config.battle, _.range(0, config.battle.length, 0));
+var battleCount = _.zipObject(config.battle, _.range(0, config.battle.length, 0));
 
-console.log(battleCount);
-_.forEach(tracking, function (hash)
+_.forEach(config.battle, function (hash)
 {
     t.track(hash);
 });
@@ -125,14 +116,6 @@ t.on('tweet', function (tweet)
     };
 
     var lowText = tl.text.toLowerCase();
-    /*_.forEach(config.wall, function (hash)
-    {
-        if (lowText.indexOf(hash) !== -1)
-        {
-            io.to('clients').emit('tweet', tl);
-            return false;
-        }
-    });*/
 
     _.forEach(config.battle, function (hash)
     {
