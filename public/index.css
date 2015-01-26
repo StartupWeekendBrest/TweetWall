@@ -204,6 +204,10 @@ html, body, .container {
     padding: 0;
 }
 
+#tweets {
+    list-style-type: none;
+}
+
 .tweet {
     position: relative;
     overflow: auto;
