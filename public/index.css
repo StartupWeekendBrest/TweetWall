@@ -234,6 +234,11 @@ html, body, .container {
 
 .tweet .content {
     margin-left: 72px;
+    overflow: hidden;
+}
+
+.tweet {
+    overflow: hidden;
 }
 
 .tweet .content .underline {
