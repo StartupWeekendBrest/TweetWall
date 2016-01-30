@@ -15,7 +15,7 @@ $(function ()
         {
             var domTweet = '<li><div class="tweet">' +
                 '<div class="pic">' +
-                '<img src="' + data.user.image + '" />' +
+                '<img class="user" src="' + data.user.image + '" />' +
                 '</div>' +
                 '<div class="content">' +
                 '<h1>' + data.user.name + '</h1>' +

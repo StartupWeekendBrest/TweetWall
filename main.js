@@ -105,6 +105,14 @@ io.on('connection', function (socket)
 
 t.on('tweet', function (tweet)
 {
+  if(tweet.entities && tweet.entities.media) {
+    for(var i = 0; i < tweet.entities.media.length; i++) {
+      var m = tweet.entities.media[i];
+      if(m.type === 'photo') {
+        tweet.text += '<img src="' + m.media_url + '"></img>';
+      }
+    }
+  }
     var tl = {
         text: tweet.text,
         time: tweet.timestamp_ms,

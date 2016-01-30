@@ -222,7 +222,7 @@ html, body, .container {
     bottom: 0;
 }
 
-.tweet img {
+.tweet img.user {
     /*position: absolute;
     top: 50%;*/
     margin-top: 16px;
@@ -258,6 +258,10 @@ html, body, .container {
 
 .tweet p {
     margin: 8px 0 0 0;
+}
+
+.tweet p img {
+    width: 100%;
 }
 
 .tweet p span {
