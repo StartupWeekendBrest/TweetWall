@@ -106,10 +106,13 @@ io.on('connection', function (socket)
 t.on('tweet', function (tweet)
 {
   if(tweet.entities && tweet.entities.media) {
-    for(var i = 0; i < tweet.entities.media.length; i++) {
-      var m = tweet.entities.media[i];
+    for(var i = 0; i < tweet.extended_entities.media.length; i++) {
+      var m = tweet.extended_entities.media[i];
       if(m.type === 'photo') {
         tweet.text += '<img src="' + m.media_url + '"></img>';
+      } else if (m.type === 'animated_gif') {
+        var video_url = m.video_info.variants[0].url;
+        tweet.text += '<video src="' + video_url + '" loop autoplay />';
       }
     }
   }

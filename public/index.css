@@ -264,6 +264,10 @@ html, body, .container {
     width: 100%;
 }
 
+.tweet p video {
+    width: 100%;
+}
+
 .tweet p span {
     color: gray;
 }
