@@ -4,6 +4,7 @@ config.json
 -----------
 ```
 {
+  "battlestart": "2017-01-27"
   "battle": [
     "#pizza",
     "#nodejs",

@@ -1,13 +1,18 @@
-var Twitter = require('node-tweet-stream'),
+var Twitter = require('twitter'),
+    TwitterStream = require('node-tweet-stream'),
     config  = require('./config.json'),
-    t       = new Twitter(
-        {
+    twitter = new Twitter({
+            consumer_key: config.twitter.consumer_key,
+            consumer_secret: config.twitter.consumer_secret,
+            access_token_key: config.twitter.token,
+            access_token_secret: config.twitter.token_secret
+    }),
+    t       = new TwitterStream({
             consumer_key: config.twitter.consumer_key,
             consumer_secret: config.twitter.consumer_secret,
             token: config.twitter.token,
             token_secret: config.twitter.token_secret
-        }
-    ),
+    }),
     express = require('express'),
     app     = express(),
     server  = require('http').createServer(app),
@@ -76,6 +81,41 @@ _.forEach(config.battle, function (hash)
 
 _.extend(battleCount, state.battle);
 
+/************************************************************************************************************************
+ Looking for tweets in case back-up is empty
+************************************************************************************************************************/
+function countPreviousTweets(hash, statuses, id) {
+  var until = '';
+  if(id) {
+    until = '&max_id='+id;
+  }
+  if(!statuses) {
+    statuses = [];
+  }
+  var uri = 'search/tweets.json?q=%23'+hash.substring(1)+' since:'+config.battlestart+'&count=100&result_type=recent' + until;
+  twitter.get(uri, function (error, tweets, response) {
+    if(error) {
+      console.error(error);
+      process.exit();
+    }
+    if(tweets.statuses) {
+      statuses = statuses.concat(tweets.statuses);
+      if(tweets.statuses.length === 100) {
+        countPreviousTweets(hash, statuses, tweets.statuses[99].id);
+      } else {
+        battleCount[hash] += statuses.length;
+        console.log('Retrieved ' + battleCount[hash] + ' tweets for ' + hash);
+        io.to('clients').emit('battle', battleCount);
+      }
+    }
+  });
+}
+
+if(Object.keys(state).length === 0) {
+  _.forEach(config.battle, function(hash) {
+    countPreviousTweets(hash);
+  })
+}
 
 /************************************************************************************************************************
  * App
