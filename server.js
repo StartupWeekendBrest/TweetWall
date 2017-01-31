@@ -40,7 +40,10 @@ config.battle = _.map(config.battle, function (hash)
 _.forEach(config.battle, function (hashtag)
 {
 	if(state.isEmpty(hashtag)) {
+		// If we counted no tweet for a hashtag, retrieve them with the Twitter API
 		utils.countPreviousTweets(hashtag, function(tweets) {
+			// Once the tweets have been retrieved, notify the user to update
+			// its counter
 			state.updateCounter(hashtag, tweets.length);
 			io.to('clients').emit('battle', state.battle);
 		})
@@ -57,6 +60,7 @@ io.on('connection', function(socket) {
 t.on('tweet', function(tweet) {
 	utils.tweetHandler(tweet, function(hashtag, processedTweet) {
 		state.updateCounter(hashtag, 1);
+		// Notify the user
 		io.to(hashtag).emit('tweet', processedTweet);
 		io.to('clients').emit('battle', state.battle);
 	});
@@ -70,27 +74,22 @@ state.autoRoll(function(battle) {
 });
 
 
-/************************************************************************************************************************
- * Server Setup
- ************************************************************************************************************************/
+// Server Setup
 var port = process.env.PORT || 3000;
 
-server.listen(port, function ()
-{
+server.listen(port, function () {
     log.info('Server listening at port ' + port);
 });
 
 //app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
 
-app.use(function logErrors (err, req, res, next)
-{
+app.use(function logErrors (err, req, res, next) {
     console.error(err.stack);
     next(err);
 });
 
-app.use(function clientErrorHandler (err, req, res, next)
-{
+app.use(function clientErrorHandler (err, req, res, next) {
     if (req.xhr) {
         res.status(500).send({error: 'Something blew up!'});
     }
@@ -99,8 +98,7 @@ app.use(function clientErrorHandler (err, req, res, next)
     }
 });
 
-app.use(function errorHandler (err, req, res, next)
-{
+app.use(function errorHandler (err, req, res, next) {
     res.status(500);
     res.render('error', {error: err});
 });

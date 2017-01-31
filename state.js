@@ -7,11 +7,18 @@ var log = printit({
 	date: true
 });
 
-// Parameters
+
+// Delays
 const SAVE_STATE_DELAY	= 60;
 const ROLL_DELAY		= 5*60;
 
+
+// The app's state is all the variables containing the data on the battle
 class State {
+	
+	// Initialise the object
+	// @param: fileName (string)	File to read/write battls history. If the
+	//								file does not exist, it will be created.
 	constructor(fileName) {
 		this.fileName = fileName;
 		
@@ -30,6 +37,8 @@ class State {
 		}
 	}
 	
+	
+	// Periodically write the battle state in the history file
 	autoSaveCurrentState() {
 		setTimeout(() => {
 			let state = {
@@ -49,8 +58,10 @@ class State {
 		}, SAVE_STATE_DELAY * 1000);
 	}
 	
+	
+	// Periodically save the current battle state so we can compare it with the
+	// other saves
 	autoRoll(onRolled) {
-
 		setTimeout(() => {
 			this.battle._time = Math.floor(new Date().getTime() / 1000);
 			this.times.push(_.clone(this.battle));
@@ -62,10 +73,19 @@ class State {
 		}, ROLL_DELAY * 1000);
 	}
 	
+	
+	// Update the counter for a given hashtag, adding a given amount to it
+	// @param: hashtag (string) The hashtag to update the counter of
+	// @param: amount (integer) The ammount to add to the counter
 	updateCounter(hashtag, amount) {
 		this.battle[hashtag] += amount;
 	}
 	
+	
+	// Indicates if the counter for a given hashtag is null
+	// @param: hashtag (string) Hashtag to check the counter of
+	// @return:	true if the counter equals to 0
+	//			false if the counter is set to a non-null value
 	isEmpty(hashtag) {
 		return (!this.battle || !this.battle[hashtag]);
 	}
