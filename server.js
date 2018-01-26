@@ -6,7 +6,7 @@ var Twitter	= require('node-tweet-stream'),
 	app		= express(),
 	server 	= require('http').createServer(app),
 	io		= require('socket.io')(server),
-	State	= require('./state.js'),
+	state	= require('./state.js'),
 	utils	= require('./utils.js');
 
 
@@ -25,10 +25,6 @@ var t		= new Twitter({
 		prefix: 'TweetWall',
 		date: true
 	});
-
-
-// Create a state object which will manage the battle's history
-var state = new State('./back.json');
 
 
 // Process battle config
