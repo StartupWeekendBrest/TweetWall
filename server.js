@@ -72,9 +72,10 @@ state.autoRoll(function(battle) {
 
 // Server Setup
 var port = process.env.PORT || 3000;
+var host = process.env.HOST || '0.0.0.0'
 
-server.listen(port, function () {
-    log.info('Server listening at port ' + port);
+server.listen(port, host, function () {
+    log.info('Server listening on ' + host + ':' + port);
 });
 
 //app.use(morgan('dev'));
