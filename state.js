@@ -51,7 +51,7 @@ class State {
 					log.error(err);
 				}
 				else {
-					log.debug('Saved');
+					log.info('Saved');
 				}
 				this.autoSaveCurrentState();
 			});
