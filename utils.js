@@ -105,11 +105,11 @@ function tweetHandler(tweet, onProcessed) {
 			// included the media type
 		  	var m = tweet.extended_entities.media[i];
 			if(m.type === 'photo') {
-				tweet.text += '<img src="' + m.media_url + '"></img>';
+				tweet.text += '<img src="' + m.media_url.replace("http://", "https://") + '"></img>';
 			} else if (m.type === 'animated_gif') {
 				// Twitter GIF are actually MP4 videos
 				var video_url = m.video_info.variants[0].url;
-				tweet.text += '<video src="' + video_url + '" loop autoplay />';
+				tweet.text += '<video src="' + video_url.replace("http://", "https://") + '" loop autoplay />';
 			}
 		}
 	}
@@ -121,7 +121,7 @@ function tweetHandler(tweet, onProcessed) {
 		user: {
 			name: tweet.user.name,
 			screen_name: tweet.user.screen_name,
-			image: tweet.user.profile_image_url
+			image: tweet.user.profile_image_url.replace("http://", "https://")
 		}
 	};
 
